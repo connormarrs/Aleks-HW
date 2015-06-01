@@ -10,3 +10,4 @@ def idealgas(atm,mol,kel):
 vol=idealgas(1,5,500)
 a="The volume of %s is %20f." % (gasname,vol)
 print a
+ #Refactored this with Aleks on 6/1/15
