@@ -6,4 +6,4 @@ def mult(range1, range2):
 for range1 in range(1,13):
     for range2 in range(1,13):
         table = mult(range1,range2)
-        print table
+        print "The product of ",range1, "and" ,range2, "is" ,table
