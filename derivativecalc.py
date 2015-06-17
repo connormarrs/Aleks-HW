@@ -9,6 +9,10 @@ def square(coef):
     square = float(coef)*2
     return(square)
 
+userinput = input("Which order of polynomial would you like to differentiate:")
+
+for i in range[1,(userinput+1)]
+
 print"type the coefficients of a cubic equation in the form of ax^3 + bx^2 + cx + d"
 a = input("What is a in this equation:\n")
 b = input("What is b in this equation:\n")
