@@ -9,9 +9,11 @@ def get_coef_from_user(coef_n):
 list_of_coefs = list()
 d_coefs = list()
 print
+
 for i in range(0, degree + 1):
     thing_to_extend = get_coef_from_user(i)
     list_of_coefs.extend([thing_to_extend])
+    
     #Multiply values by degree of variable & bundle
     other_thing_to_extend = list_of_coefs[i] * (degree - i)
     d_coefs.extend([other_thing_to_extend])
