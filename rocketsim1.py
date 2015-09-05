@@ -30,7 +30,7 @@ ge.extend([gei])
 gm.extend([gmi])
 
 #define dt, general unit of time for program
-dt = 1 #0.1 seconds
+dt = 0.001 #0.1 seconds
 
 #initialize time list and fill
 time = list(np.arange(0,400,dt))
@@ -38,15 +38,7 @@ time = list(np.arange(0,400,dt))
 #define position, velocity, acceleration, and time dependent quantities
 for i in range(1,len(time)+1):
     #Here we find the next position
-    print
-    print"This is loop", i
-    print
-    print"These are the positions", x
-    print
-    print"These are the velocities", vel
-    print
-    print"These are the accelerations", accel
-    print
+    
     vnew=vel[i-1]+accel[i-1]*dt
     vel.extend([vnew])
     xnew=x[i-1]+vel[i-1]*dt
@@ -60,11 +52,16 @@ for i in range(1,len(time)+1):
     
     #detect index of timestamp when velocity and acceleration are at zero. take     this quantity and print it
     timefinal=time[i]
-
+    velfinal=vel[i]
+    xfinal=x[i]
+    accelfinal=accel[i]
     if x[-1]>dtotal:
         print"time=", timefinal
         print
+        print"position=", xfinal
         print
+        print"vel=", velfinal
         print
+        print"accel=", accelfinal
         print
         break
