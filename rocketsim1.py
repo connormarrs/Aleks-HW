@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 #initialize 3 lists
 accel=list()
 vel=list()
@@ -85,19 +86,6 @@ for i in range(0,len(time)):
         print
         print"accel=", accelfinal
         print
-        print len(mt)
-        print
-        print len(etime)
-        print
-        print etime[0:5]
-        print
-        print etime[-5:-1]
-        print
-        print mt[0:5]
-        print
-        print mt[-5:-1]
-        print type(etime)
-        print type(mt)
         print"you made it to the moon"
 
         break
@@ -109,7 +97,7 @@ for i in range(0,len(time)):
         print"you're dead"
         break
         
-import matplotlib.pyplot as plt
+# Start to draw plots of mass, velocity, acceleration, and position.
 plt.plot(etime, mt, linestyle='-', color='r', label='Rocket Velocity')
 # plt.axis([0, (max(etime)), 0, (max(mt))])
 plt.title("Mass of rocket over time:")
@@ -118,3 +106,4 @@ plt.xlabel("Time (.1 seconds)")
 plt.ylabel("Mass (KG)")
 plt.legend(loc="best")
 plt.show()
+
