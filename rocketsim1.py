@@ -16,16 +16,16 @@ dtotal = 392508000
 md = 5200 #initial mass of dry rocket
 mf = 52000 #initial mass of fuel
 fuelbr = 0.001
-tr = 4.4*10**8
+tr = 4.4*10**9
 vi = 11200
 
 #Here, we set the initial values and conditions
 x.extend([160000])
 mt.extend([md+mf])
 
-gei = g*earth*mt[0]/(x[0])**2
-gmi = g*moon*mt[0]/(dtotal-x[0])**2
-a0 = (tr-gei+gmi)/mt[0]
+gei = g*earth/(x[0])**2
+gmi = g*moon/(dtotal-x[0])**2
+a0 = (tr)/mt[0]-gei+gmi
 
 accel.extend([a0])
 vel.extend([vi])
@@ -48,11 +48,11 @@ for i in range(0,len(time)):
     vel.extend([vnew])
     xnew=x[i]+vel[i]*dt
     x.extend([xnew])
-    genew=g*earth*mt[i]/(x[i])**2
+    genew=g*earth/(x[i])**2
     ge.extend([genew])
-    gmnew=g*moon*mt[i]/(dtotal-x[i])**2
+    gmnew=g*moon/(dtotal-x[i])**2
     gm.extend([gmnew])
-    accelnew=(tr+gm[i]-ge[i])/mt[i]
+    accelnew=(tr)/mt[i]+gm[i]-ge[i]
     accel.extend([accelnew])
     
     print"these are our times:", time[-1]
@@ -85,6 +85,12 @@ for i in range(0,len(time)):
         print"accel=", accelfinal
         print
         print"you made it to the moon"
+        # import matplotlib.pyplot as plt
+#         x=time
+#         y=mt
+#         plt.plot(x, y, 'yx', )
+#         plt.axis([0, 6, 0, 20])
+#         plt.show()
         break
     
     elif x[-1]<dtotal:
