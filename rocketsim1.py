@@ -15,7 +15,7 @@ leo = 6531
 dtotal = 392508000
 md = 5200 #initial mass of dry rocket
 mf = 52000 #initial mass of fuel
-fuelbr = 0.001
+fuelbr = 1000
 tr = 4.4*10**9
 vi = 11200
 
@@ -42,7 +42,7 @@ time = list(np.arange(0,900,dt))
 for i in range(0,len(time)):
     #Here we find the next position
     
-    mtnew=md+(mf-fuelbr*dt)
+    mtnew=mt[i-1]-fuelbr*dt
     mt.extend([mtnew])
     vnew=vel[i]+accel[i]*dt
     vel.extend([vnew])
@@ -55,26 +55,27 @@ for i in range(0,len(time)):
     accelnew=(tr)/mt[i]+gm[i]-ge[i]
     accel.extend([accelnew])
     
-    print"these are our times:", time[-1]
-    print""
-    print"these are our masses:", mt[-1]
-    print""
-    print"these are our positions:", x[-1]
-    print""
-    print"these are our velocities:", vel[-1]
-    print""
-    print"these are our accelerations:", accel[-1]
-    print""
-    print"this is the total distance to the moon:", dtotal
-    print""
-    print""
-    print""
+    # print"these are our times:", time[-1]
+#     print""
+#     print"these are our masses:", mt[-1]
+#     print""
+#     print"these are our positions:", x[-1]
+#     print""
+#     print"these are our velocities:", vel[-1]
+#     print""
+#     print"these are our accelerations:", accel[-1]
+#     print""
+#     print"this is the total distance to the moon:", dtotal
+#     print""
+#     print""
+#     print""
     
     #detect index of timestamp when position is larger than the total distance between the moon and earth
     timefinal=time[i]
     velfinal=vel[i]
     xfinal=x[i]
     accelfinal=accel[i]
+    etime=time[0:len(mt)]
     if x[-1]>dtotal:
         print"time=", timefinal
         print
@@ -84,13 +85,21 @@ for i in range(0,len(time)):
         print
         print"accel=", accelfinal
         print
+        print len(mt)
+        print
+        print len(etime)
+        print
+        print etime[0:5]
+        print
+        print etime[-5:-1]
+        print
+        print mt[0:5]
+        print
+        print mt[-5:-1]
+        print type(etime)
+        print type(mt)
         print"you made it to the moon"
-        # import matplotlib.pyplot as plt
-#         x=time
-#         y=mt
-#         plt.plot(x, y, 'yx', )
-#         plt.axis([0, 6, 0, 20])
-#         plt.show()
+
         break
     
     elif x[-1]<dtotal:
@@ -99,3 +108,13 @@ for i in range(0,len(time)):
     if vel[-1]<0:
         print"you're dead"
         break
+        
+import matplotlib.pyplot as plt
+plt.plot(etime, mt, linestyle='-', color='r', label='Rocket Velocity')
+# plt.axis([0, (max(etime)), 0, (max(mt))])
+plt.title("Mass of rocket over time:")
+plt.margins(0.1)
+plt.xlabel("Time (.1 seconds)")
+plt.ylabel("Mass (KG)")
+plt.legend(loc="best")
+plt.show()
