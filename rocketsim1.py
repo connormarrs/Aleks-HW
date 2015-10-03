@@ -21,7 +21,7 @@ dtotal = radearth + radmoon + semimajoraxis
 md = 5200 #initial mass of dry rocket kg
 mf = 52000 #initial mass of fuel kg
 fuelbr = 1000 #kg/s
-tr = 10**6 #Newtons
+tr = 10**8 #Newtons
 vi = 0 #m/s
 
 #Here, we set the initial values and conditions
@@ -38,7 +38,7 @@ ge.extend([gei])
 gm.extend([gmi])
 
 #define dt, general unit of time for program
-dt = 10 #0.1 seconds
+dt = 1 #0.1 seconds
 
 #initialize time list and fill
 time = list(np.arange(0,10**5,dt))
@@ -52,6 +52,7 @@ for i in range(0,len(time)):
         mt.extend([mtnew])
     elif mt[-1]<= md:
         print"you ran out of gas, be careful"
+        tr=0 #If we have no mass to expel, we won't be able to move
         mt.extend([md])## Added by Aleks to prevent fuel burn overruns
     vnew=vel[i]+accel[i]*dt
     vel.extend([vnew])
