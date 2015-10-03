@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 #initialize 3 lists
 accel=list()
 vel=list()
@@ -37,7 +38,7 @@ ge.extend([gei])
 gm.extend([gmi])
 
 #define dt, general unit of time for program
-dt = .1 #0.1 seconds
+dt = 10 #0.1 seconds
 
 #initialize time list and fill
 time = list(np.arange(0,10**5,dt))
@@ -104,9 +105,11 @@ for i in range(0,len(time)):
     if vel[-1]<0:
         print"you're dead. You stopped moving forward"
         break
-        
+# Create a directory, in which to store our code. If we don't our program will crash.
+newpath = '/Users/connormarrs/Desktop/Cool Stuff/code/outputplots'
+if not os.path.exists(newpath): 
+    os.makedirs(newpath)     
 # Start to draw plots of mass, velocity, acceleration, and position.
-# fig=
 plt.plot(etime, mt, linestyle='-', color='r', label='Mass')
 # plt.axis([0, (max(etime)), 0, (max(mt))])
 plt.title("Mass of rocket over time:")
@@ -114,35 +117,32 @@ plt.margins(0.1)
 plt.xlabel("Time (.1 seconds)")
 plt.ylabel("Mass (KG)")
 plt.legend(loc="best")
-plt.show()
-# fig.savefig('mass.png')
+plt.savefig(os.path.join(newpath, "mass.png"))
+plt.close()
 
-# fig1=
 plt.plot(etime1, x, linestyle='-', color='r', label='Position')
 plt.title("Position of Rocket over time:")
 plt.margins(0.1)
 plt.xlabel("Time (.1 seconds)")
 plt.ylabel("Position")
 plt.legend(loc="best")
-plt.show()
-# fig1.savefig('position.png')
+plt.savefig(os.path.join(newpath, "position.png"))
+plt.close()
 
-# fig2=
 plt.plot(etime2, vel, linestyle='-', color='r', label='Velocity')
 plt.title("Velocity of Rocket over time:")
 plt.margins(0.1)
 plt.xlabel("Time (.1 seconds)")
 plt.ylabel("Velocity")
 plt.legend(loc="best")
-plt.show()
-# fig2.savefig('velocity.png')
+plt.savefig(os.path.join(newpath, "velocity.png"))
+plt.close()
 
-# fig3=
 plt.plot(etime3, accel, linestyle='-', color='r', label='Acceleration')
 plt.title("Acceleration of Rocket over time:")
 plt.margins(0.1)
 plt.xlabel("Time (.1 seconds)")
 plt.ylabel("Acceleration")
 plt.legend(loc="best")
-plt.show()
-# fig3.savefig('acceleration.png')
+plt.savefig(os.path.join(newpath, "acceleration.png"))
+plt.close()
